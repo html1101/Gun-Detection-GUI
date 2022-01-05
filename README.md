@@ -6,4 +6,5 @@
 <li>Now you'll have the folder open in VSCode; you can use that for editing the files in the folder Frontend just like QuizRead.</li>
 <li>You can run all this by going back to that command line you opened VSCode from and entering: <code>npm install</code> (for the first time you run this, you don't need to use it afterwards), then <code>npm start</code></li>
 <li>Every time you change a file in Frontend, you don't need to <code>npm start</code> every single time; rather, if you simply refresh the page with Ctrl-R, the UI should update.</li>
+<li>Once you're ready to save your work (better too much than too little; I've already committed my barebones backend stuff 3 times &#9786;), you can push this back to GitHub by running: <code>git add</code>, then <code>git commit -am "[Your message]"</code>, and <code>git push -u origin main</code>.</li>
 </ol>
