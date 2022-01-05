@@ -6,6 +6,8 @@ const createWindow = () => {
         height: 600,
         title: "Gun Detection GUI"
     })
+
+    win.loadFile("Frontend/index.html")
 }
 
 app.whenReady().then(() => {

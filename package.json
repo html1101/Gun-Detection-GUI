@@ -4,7 +4,8 @@
   "description": "Gun Detection GUI that bridges a YOLO model with surveillance cameras connected serially.",
   "main": "backend.js",
   "scripts": {
-    "test": "npm start"
+    "test": "npm start",
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/html1101/Gun-Detection-GUI/issues"
   },
-  "homepage": "https://github.com/html1101/Gun-Detection-GUI#readme"
+  "homepage": "https://github.com/html1101/Gun-Detection-GUI#readme",
+  "dependencies": {
+    "electron": "^16.0.6"
+  }
 }
