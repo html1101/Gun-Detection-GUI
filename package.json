@@ -1,0 +1,29 @@
+{
+  "name": "gun-detection-gui",
+  "version": "1.0.0",
+  "description": "Gun Detection GUI that bridges a YOLO model with surveillance cameras connected serially.",
+  "main": "backend.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/html1101/Gun-Detection-GUI.git"
+  },
+  "keywords": [
+    "gun",
+    "yolov5",
+    "yolo",
+    "gui",
+    "electron",
+    "html",
+    "css",
+    "js"
+  ],
+  "author": "Jasmine Hollis and Sarah Cross",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/html1101/Gun-Detection-GUI/issues"
+  },
+  "homepage": "https://github.com/html1101/Gun-Detection-GUI#readme"
+}
