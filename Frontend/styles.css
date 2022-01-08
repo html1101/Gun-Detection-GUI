@@ -1,6 +1,7 @@
 body {
     --bar-width: 9rem;
     --bar-height: 3.5rem;
+    --adaptive-width: 2em;
     --bar-color: lightgrey;
     font-family: 'Be Vietnam Pro';
 }
@@ -25,7 +26,7 @@ body {
     left: 0;
     top: 0;
     z-index: 2;
-    width: 2em;
+    width: var(--adaptive-width);
     overflow-x: hidden;
     white-space: nowrap;
     background: var(--bar-color);
@@ -93,4 +94,15 @@ body {
 #side-bar > a > svg {
     width: 1.1em;
     height: 1.1em;
+}
+
+#body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: var(--bar-height);
+    width: calc(100% - 2em);
+    height: calc(100% - var(--bar-height));
+    margin-left: 2em;
+    background: blue;
 }
