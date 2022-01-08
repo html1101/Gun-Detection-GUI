@@ -104,5 +104,5 @@ body {
     width: calc(100% - 2em);
     height: calc(100% - var(--bar-height));
     margin-left: 2em;
-    background: blue;
+    background: white;
 }
