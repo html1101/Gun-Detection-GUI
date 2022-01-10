@@ -10,6 +10,7 @@
 </ol>
 
 <h1>Steps to Get Done!</h1>
+
 - [x] Create framework to add cameras (see <code>cameras.js</code>)
 - [ ] Search and add cameras and popup.
 - [ ] Classification models
