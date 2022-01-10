@@ -10,13 +10,13 @@
 </ol>
 
 <h1>Steps to Get Done!</h1>
-[x] Create framework to add cameras (see <code>cameras.js</code>)
-[ ] Search and add cameras and popup.
-[ ] Classification models
-[ ] Object Detection models
-[ ] Users page
-[ ] Actual model - highlighting, notifications
-[ ] Display camera feed in dashboard
+- [x] Create framework to add cameras (see <code>cameras.js</code>)
+- [ ] Search and add cameras and popup.
+- [ ] Classification models
+- [ ] Object Detection models
+- [ ] Users page
+- [ ] Actual model - highlighting, notifications
+- [ ] Display camera feed in dashboard
 
 <h1>Current Limitations</h1>
 - onvif uses xml2js - very difficult to setup w/ Electron when packaging
