@@ -8,3 +8,16 @@
 <li>Every time you change a file in Frontend, you don't need to <code>npm start</code> every single time; rather, if you simply refresh the page with Ctrl-R, the UI should update.</li>
 <li>Once you're ready to save your work (better too much than too little; I've already committed my barebones backend stuff 3 times &#9786;), you can push this back to GitHub by running: <code>git add</code>, then <code>git commit -am "[Your message]"</code>, and <code>git push -u origin main</code>.</li>
 </ol>
+
+<h1>Steps to Get Done!</h1>
+[x] Create framework to add cameras (see <code>cameras.js</code>)
+[ ] Search and add cameras and popup.
+[ ] Classification models
+[ ] Object Detection models
+[ ] Users page
+[ ] Actual model - highlighting, notifications
+[ ] Display camera feed in dashboard
+
+<h1>Current Limitations</h1>
+- onvif uses xml2js - very difficult to setup w/ Electron when packaging
+- Unable to detect camera on complex networks, uses multicasting which has some limitations

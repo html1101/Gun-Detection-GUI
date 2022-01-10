@@ -1,0 +1,114 @@
+.top-bit {
+    /* Place at top left of cam */
+    display: inline-block;
+    margin-left: 0.25em;
+    margin-top: 0.25em;
+    color: #8a87b1;
+    font-weight: 800;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+}
+
+#cam-frame {
+    position: fixed;
+    top: var(--bar-height);
+    left: 2em;
+    height: calc(100% - var(--bar-height) - var(--event-height));
+    width: calc(100% - 2em);
+    color: white;
+}
+
+#events-list {
+    position: absolute;
+    height: calc(var(--event-height) - 0.5em - 0.5em);
+    width: calc(100% - 0.5em - 1em);
+    left: 0.5em;
+    background: var(--col-1);
+    color: #D6D4F0;
+    bottom: 0.5em;
+    padding-left: 0.5em;
+    padding-top: 0.5em;
+    border-radius: 1em;
+    background: var(--main-color);
+}
+
+#selected-cam {
+    position: absolute;
+    left: 0.5em;
+    top: 0.5em;
+    width: calc(66.666% - 2em);
+    height: calc(66.66% - 1em);
+}
+
+#side-col {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    /* Potential space-between? */
+    justify-content: space-between;
+    width: 33.3333%;
+    height: calc(100% - 1em);
+    right: 0.5em;
+    margin-top: 0.5em;
+}
+
+#bottom-col {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    bottom: 0.5em;
+    width: calc(66.66667% - 2em);
+    margin-left: 0.5em;
+    height: calc(32% - 0.5em);
+    justify-content: space-between;
+}
+
+#bottom-col > .cam {
+    flex: 49.5%;
+    flex-grow: 0;
+}
+
+.cam {
+    border-radius: 1em;
+    background: var(--main-color);
+    box-shadow: 1px 1px 8px 3px var(--main-color);
+    transition: 0.25s;
+}
+
+.cam > img {
+    position: static;
+    display: block;
+    margin-top: -1em;
+    max-width: 100%;
+    max-height: calc(100% - 1em);
+    /* margin: auto; */
+}
+
+.cam:hover {
+    box-shadow: 1px 1px 15px 1px #0b091a;
+}
+
+#side-col > .cam {
+    flex: 32%;
+    flex-grow: 0;
+}
+
+#side-col > .cam:first-of-type {
+    border-top: 0;
+}
+
+#bottom-col > .cam:last-of-type {
+    border-right: 0;
+}
+
+#drag-top {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    margin-left: -50px;
+    width: 100px;
+    height: 5px;
+    margin-top: -2px;
+    background: rgb(56, 56, 56);
+}
