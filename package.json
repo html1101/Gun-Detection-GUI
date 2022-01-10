@@ -28,6 +28,10 @@
   },
   "homepage": "https://github.com/html1101/Gun-Detection-GUI#readme",
   "dependencies": {
-    "electron": "^16.0.6"
+    "electron": "^16.0.6",
+    "nimble": "^0.0.2",
+    "node-rtsp-stream": "^0.0.9",
+    "onvif": "^0.6.5",
+    "xml2js": "^0.4.23"
   }
 }
