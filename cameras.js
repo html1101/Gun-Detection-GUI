@@ -99,3 +99,5 @@ cams.findDVRCams("192.168.86.39").then(num_cams => {
 })
 
 */
+
+module.exports = Cameras;

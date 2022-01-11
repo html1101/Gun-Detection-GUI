@@ -12,13 +12,14 @@
 <h1>Steps to Get Done!</h1>
 
 - [x] Create framework to add cameras (see <code>cameras.js</code>)
-- [ ] Search and add cameras and popup.
+- [x] Search and add cameras and popup.
 - [ ] Classification models
 - [ ] Object Detection models
 - [ ] Users page
 - [ ] Actual model - highlighting, notifications
-- [ ] Display camera feed in dashboard
+- [x] Display camera feed in dashboard
 
 <h1>Current Limitations</h1>
-- onvif uses xml2js - very difficult to setup w/ Electron when packaging
-- Unable to detect camera on complex networks, uses multicasting which has some limitations
+- onvif uses xml2js - very difficult to setup w/ Electron when packaging<br>
+- Unable to detect camera on complex networks, uses multicasting which has some limitations<br>
+- Only multicasting currently implemented (also popup and dashboard not connected yet)

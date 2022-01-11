@@ -3,13 +3,18 @@ body {
     --bar-height: 3.5rem;
     --adaptive-width: 2rem;
     --text-color: #A9B1BC;
+    --popup-color: #383838;
     --body-color: #212121;
     --main-color: #1E1D1E;
     --select-col: #1DDECB;
     --select-col-2: #AEEE98;
     --event-height: 10rem;
     font-family: 'Be Vietnam Pro';
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
     user-select: none;
+    color: var(--text-color);
 }
 
 #science-icon {
@@ -28,7 +33,7 @@ body {
     color: var(--text-color);
     height: var(--bar-height);
     background: var(--main-color);
-    box-shadow: 1px 1px 8px 3px #11171C;
+    box-shadow: 1px 1px 8px 3px #00000056;
 }
 
 #side-bar {
@@ -43,7 +48,7 @@ body {
     flex-direction: column;
     height: calc(100% - var(--bar-height));
     transition: 0.25s;
-    box-shadow: 1px 10px 8px 3px #11171C;
+    box-shadow: 1px 10px 8px 3px #00000056;
 }
 
 #side-bar:hover {
@@ -72,12 +77,13 @@ body {
     content: '';
     position: absolute;
     display: block;
-    width: .1em;
+    width: .13em;
     height: 1em;
     background: transparent; /*var(--select-col-2);*/
     margin-top: 0.29em;
     margin-left: -4px;
     transition: 0.25s;
+    border-radius: 7px;
 }
 
 #side-bar > a:hover::before {
@@ -132,4 +138,16 @@ body {
 
 #drag-top:hover {
     cursor: n-resize;
+}
+
+
+#top-bar > svg {
+    width: 0.9em;
+    height: 0.9em;
+    margin-left: 0.5em;
+    padding-bottom: 0.25em;
+}
+
+*[id^="hide_"] {
+    display: none;
 }
