@@ -40,6 +40,7 @@ const createWindow = () => {
                     win.webContents.send("finishedLoading", true);
                 });
                 cams.emitter.on("addCam", (cam) => {
+                    
                     win.webContents.send("cameraInfo", cam);
                 })
                 break;

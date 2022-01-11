@@ -12,7 +12,7 @@
  */
 
  var IP_RANGE_START = '192.168.15.1',
- IP_RANGE_END = '192.168.15.255',
+ IP_RANGE_END = '192.168.15.254',
  PORT_LIST = [80],
  USERNAME = 'admin',
  PASSWORD = 'admin';
