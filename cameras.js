@@ -72,37 +72,54 @@ class Cameras {
         this.emitter = new events.EventEmitter();
     }
 
-    async searchCamerasBrute(search_options) {
+    async searchCamerasBrute(search_options, search_timeout=3000) {
         // Search cameras, brute force. Given a range of IPs, search over and check.
         let range_ips = generate_range(search_options["ip_start"], search_options["ip_end"]);
 
-        console.log(range_ips);
+        const camera = this;
+
+        let camera_list = [];
+
+        let promise = new Promise((res, rej) => {
+            setTimeout(() => {
+                res(camera_list);
+            }, search_timeout);
+        });
+
         range_ips.forEach(ip => {
             new Cam({
                 hostname: ip,
                 username: username,
                 password: password,
                 port: 80,
-                timeout: 3000
+                timeout: search_timeout
             }, function CamErr(err) {
                 if (err)  {
-                    if (err.message) {console.log("ERR: " + err.message);} else {console.log("ERR: " + err);}
                     return;
                 }
 
-                // this.getDeviceInformation((data) => {
-                //     console.log(ip, data);
-                // })
-                this.getStreamUri({
+                let run = this;
+                run.getStreamUri({
                     protocol: 'RTSP',
                     stream: 'RTP-Unicast'
                 }, function (err, stream, xml) {
-                    if (!err) { console.log("ERR"); return; };
-                    console.log("STREAM!", stream);
+                    if (err) { console.log("ERR"); return; };
+                    // Now get information about the manufacturer, etc of this camera
+                    run.getDeviceInformation((err, info, xml) => {
+                        // Now we have distinguishing info and a RTSP url.
+                        let inf = {
+                            "address": ip,
+                            "url": stream.uri,
+                            ...info
+                        };
+                        camera.emitter.emit("addCam", inf);
+                        camera_list.push(inf);
+                    });
                 });
 
             })
         });
+        return await promise;
     }
     /**
      * Search for cameras on the network using ONVIF.
@@ -122,6 +139,7 @@ class Cameras {
         onvif.Discovery.on('device', function (cam, rinfo, xml) {
             // function will be called as soon as NVT responds
             let addr = rinfo.address;
+            console.log("Foun: ", addr);
 
             // Find RTSP address
             let this_cam = new Cam({
@@ -129,17 +147,23 @@ class Cameras {
                 username: username,
                 password: password,
                 timeout: 5000
-            }, (err) => {
-                cam_list.push(addr);
-                this.getStreamUri({
+            }, function(err) {
+                let run = this;
+                run.getStreamUri({
                     protocol: 'RTSP',
                     stream: 'RTP-Unicast'
                 }, function (err, stream, xml) {
-                    if (!err) { return; };
-                    console.log(stream);
-                });
-                camera.emitter.emit("addCam", {
-                    "address": addr
+                    if (err) { console.log("ERR"); return; };
+                    // Now get information about the manufacturer, etc of this camera
+                    run.getDeviceInformation((err, info, xml) => {
+                        // Now we have distinguishing info and a RTSP url.
+                        console.log("INFO: ", addr, stream);
+                        camera.emitter.emit("addCam", {
+                            "address": addr,
+                            "url": stream["uri"],
+                            ...info
+                        });
+                    });
                 });
             });
         })
@@ -179,18 +203,20 @@ class Cameras {
 /* Sample: */
 let cams = new Cameras();
 
-cams.searchCamerasBrute({
-    "ip_start": "192.168.15.1",
-    "ip_end": "192.168.15.254"
-})
-/*
-cams.searchCameras().then(val => {
-    console.log(val)
-})
+// cams.searchCamerasBrute({
+//     "ip_start": "192.168.15.1",
+//     "ip_end": "192.168.15.254"
+// }).then(res => {
+//     console.log(res);
+// })
 
-cams.findDVRCams("192.168.86.39").then(num_cams => {
+/*cams.searchCameras().then(val => {
+    console.log(val)
+})*/
+
+/*cams.findDVRCams("192.168.86.39").then(num_cams => {
     console.log(`Cameras found on this DVR: ${num_cams}`)
 })
 */
 
-// module.exports = Cameras;
+module.exports = Cameras;

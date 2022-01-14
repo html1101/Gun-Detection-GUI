@@ -31,8 +31,7 @@ const createWindow = () => {
 
     ipcMain.on("beginSearch", (info, data) => {
         // On receiving data, tell our renderer about cameras found as they are found.
-        switch(data) {
-            case "multicast":
+        if(data == "multicast") {
                 // Using ONVIF multicast to find cameras
                 console.log("Searching for cameras...");
                 cams.searchCameras().then(cam => {
@@ -40,15 +39,21 @@ const createWindow = () => {
                     win.webContents.send("finishedLoading", true);
                 });
                 cams.emitter.on("addCam", (cam) => {
-                    
                     win.webContents.send("cameraInfo", cam);
-                })
-                break;
-            case "":
-                break;
-            default:
-                break;
+                });
+        } else if(typeof(data) == "object") {
+            console.log("BRUTE SEARCH");
+            cams.searchCamerasBrute(data).then(cam => {
+                // Finished loading, tell process we're finished.
+                win.webContents.send("finishedLoading", true);
+            });
+            
+            cams.emitter.on("addCam", (cam) => {
+                console.log(cam);
+                win.webContents.send("cameraInfo", cam);
+            });
         }
+        console.log(data);
     });
 
     ipcMain.on("startRTSP", (info, data) => {

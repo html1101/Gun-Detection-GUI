@@ -1,0 +1,7 @@
+matplotlib
+numpy
+pillow
+tensorflow
+wandb
+pandas
+pydot

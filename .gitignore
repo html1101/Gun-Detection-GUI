@@ -1,2 +1,5 @@
 node_modules
-# brute-force.js
+Models/Dataset*
+Models/wandb
+models/chromedriver.exe
+Models/*/*_weights
