@@ -1,0 +1,9 @@
+body {
+    background-color: #212121
+  }
+
+#body {
+    position: relative;
+    left: 50%;
+    margin-left: -25px;
+}
