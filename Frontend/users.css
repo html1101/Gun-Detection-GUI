@@ -1,24 +1,29 @@
 #body {
     background-color: #212121;
-  }
+    padding-left: 2em;
+    width: calc(100% - 2em - 2em);
+}
 
 #welcome {
-    text-align: center;
+    text-align: left; 
 }
 
 #user_info {
-    text-align: center;
-    margin-top: 100px;
-
+    text-align: left;
+    margin-top: -100px;
+    margin-left: calc(100px + 2em);
 }
 
 #profile-pic {
     border-radius: 50%;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
+    /* Use background image to position nicely */
+    background-image: url("profile_pic_users_page.jpg");
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
 }
 
 #col-1 {
