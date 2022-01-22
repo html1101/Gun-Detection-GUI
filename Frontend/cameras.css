@@ -1,14 +1,18 @@
+body {
+  background-color: #212121
+}
+
 table, th, td {
-    border: 1px solid white;
+    border: 1px solid #AEEE98;
     border-collapse: collapse;
   }
   th {
-    background-color: #0fadad;
+    background-color: #212121;
     color: white;
   }
 
   td {
-    background-color: #96D4D4;
+    background-color: #383838;
   }
 
   #plus_button {

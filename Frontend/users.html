@@ -5,6 +5,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="cameras.css">
+    <link rel="stylesheet" href="users.css">
+    
     <body>
         <div id="top-bar">
             <img src="Science-Icon-Demo.png" alt="Science Icon" id="science-icon">
@@ -28,22 +30,16 @@
             </a>
         </div>
         <div id="body">
-            <table id="table" style="width:100%">
-                <tr>
-                    <th>Camera View</th>
-                    <th>Camera Name</th>
-                    <th>Location</th>
-                    <th>Connection Type</th>
-                </tr>
-            </table>
-            <a href="cameras.html" id="plus_button" onclick="addelement();">
-                <svg id="add_camera" xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" fill="#212121" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-                </svg>
-            </a>
+            <div class="col-1">
+                <h1 id="welcome">Welcome!</h1>
+                <div id="profile-pic"></div>
+            </div>
+            <div class="col-2">
+                <p id="user_info"></p>
+            </div>
         </div>
         <div id="cover-frame"></div>
-        <script src="cameras.js"></script>
+        <script src="users.js"></script>
         <script src="script.js"></script>
     </body>
 </html>
