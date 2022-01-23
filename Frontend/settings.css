@@ -1,0 +1,282 @@
+#body {
+    background-color: #212121;
+    height: 740px;
+    column-count: 2;
+    column-fill: auto;
+    column-gap: 0;
+    margin-top: 2em;
+}
+
+#profile {
+    width: 300px;
+    height: 200px;
+    margin-left: 2em;
+    margin-top: 3em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    display: block;
+    background-color: #383838;
+    border-radius: 25px;
+    box-shadow: 4px /*horizontal*/ 4px /*vertical*/ 7px /*blur*/ 3px /*spread*/ rgba(0, 0, 0, 0.2), 4px 4px 7px 7px rgba(0, 0, 0, 0.19);
+}
+
+#profile-pic {
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+    margin-top: 1.5em;
+    width: 70px;
+    height: 70px;
+    /* Use background image to position nicely */
+    background-image: url("profile_pic_users_page.jpg");
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: cover;
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 -4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#user_info {
+    font-size: 17px;
+    text-align: center;
+    width: 150px;
+    display: block;
+    margin: auto;
+    margin-top: 1.25em;
+    position: relative;
+    text-shadow: 2px 2px 7px #111111;
+}
+
+#max-predictions {
+    width: 300px;
+    height: 200px;
+    margin-left: 2em;
+    margin-top: 1.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    display: block;
+    background-color: #383838;
+    border-radius: 25px;
+    box-shadow: 4px 4px 7px 3px rgba(0, 0, 0, 0.2), 4px 4px 7px 7px rgba(0, 0, 0, 0.19);
+}
+
+#mp-title {
+    font-size: 22px;
+    text-align: center;
+    width: 150px;
+    display: block;
+    margin: auto;
+    margin-top: 1.5em;
+    position: relative;
+    text-shadow: 2px 2px 7px #111111;
+}
+
+#input-mp {
+    text-align: center;
+    width: 150px;
+    display: block;
+    margin: auto;
+    margin-top: 2em;
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 -4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#notifications-timeout {
+    width: 300px;
+    height: 200px;
+    margin-left: 2em;
+    margin-top: 1.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    display: block;
+    background-color: #383838;
+    border-radius: 25px;
+    box-shadow: 4px 4px 7px 3px rgba(0, 0, 0, 0.2), 4px 4px 7px 7px rgba(0, 0, 0, 0.19);
+}
+
+#nt-title {
+    font-size: 22px;
+    text-align: center;
+    width: 150px;
+    display: block;
+    margin: auto;
+    margin-top: 1.5em;
+    position: relative;
+    text-shadow: 2px 2px 7px #111111;
+}
+
+#input-nt {
+    text-align: center;
+    width: 150px;
+    display: block;
+    margin: auto;
+    margin-top: 2em;
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 -4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#minutes_label {
+    font-size: 15px;
+    text-align: center;
+    width: 150px;
+    display: block;
+    margin: auto;
+    margin-top: -0.85em;
+    position: relative;
+    text-shadow: 1px 1px 5px #111111;
+}
+
+#choose-model {
+    width: 300px;
+    height: 200px;
+    margin-left: 2em;
+    margin-top: 20em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    display: block;
+    background-color: #383838;
+    border-radius: 25px;
+    box-shadow: 4px 4px 7px 3px rgba(0, 0, 0, 0.2), 4px 4px 7px 7px rgba(0, 0, 0, 0.19);
+}
+
+#cm-title {
+    font-size: 22px;
+    text-align: center;
+    width: 200px;
+    display: block;
+    margin: auto;
+    margin-top: 1.5em;
+    position: relative;
+    text-shadow: 2px 2px 7px #111111;
+}
+
+#input-cm {
+    text-align: center;
+    width: 150px;
+    display: block;
+    margin: auto;
+    margin-top: 1.5em;
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 -4px 8px 0 rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    padding: 16px;
+}
+  
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    margin-left: 75px;
+    display: inline-block;
+}
+  
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-size: 13px;
+}
+  
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+  
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #1DDECB}
+  
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+  
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .input-cm {background-color: #1DDECB}
+
+#uses_DNN {
+    margin-top: 27px;
+    margin-left: 15px;
+}
+
+#confidence-threshold {
+    width: 300px;
+    height: 200px;
+    position: relative;
+    margin-left: 2em;
+    margin-top: 1.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    display: block;
+    background-color: #383838;
+    border-radius: 25px;
+    box-shadow: 4px 4px 7px 3px rgba(0, 0, 0, 0.2), 4px 4px 7px 7px rgba(0, 0, 0, 0.19);
+}
+
+#ct-title {
+    font-size: 22px;
+    text-align: center;
+    width: 200px;
+    display: block;
+    margin: auto;
+    margin-top: 1.5em;
+    position: relative;
+    text-shadow: 2px 2px 7px #111111;
+}
+
+.slidecontainer {
+    width: 75%;
+    margin: auto;
+    margin-top: 25px;
+  }
+  
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #1DDECB;
+    cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #1DDECB;
+    cursor: pointer;
+  }

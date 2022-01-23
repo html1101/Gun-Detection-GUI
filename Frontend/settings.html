@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="camera-popup.css">
+    <link rel="stylesheet" href="settings.css">
+    <body>
+        <div id="top-bar">
+            <img src="Science-Icon-Demo.png" alt="Science Icon" id="science-icon"> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-border-outer" viewBox="0 0 16 16">
+                <path d="M7.5 1.906v.938h1v-.938h-1zm0 1.875v.938h1V3.78h-1zm0 1.875v.938h1v-.938h-1zM1.906 8.5h.938v-1h-.938v1zm1.875 0h.938v-1H3.78v1zm1.875 0h.938v-1h-.938v1zm2.813 0v-.031H8.5V7.53h-.031V7.5H7.53v.031H7.5v.938h.031V8.5h.938zm.937 0h.938v-1h-.938v1zm1.875 0h.938v-1h-.938v1zm1.875 0h.938v-1h-.938v1zM7.5 9.406v.938h1v-.938h-1zm0 1.875v.938h1v-.938h-1zm0 1.875v.938h1v-.938h-1z"/>
+                <path d="M0 0v16h16V0H0zm1 1h14v14H1V1z"/>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" id="add_elem" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+            </svg>
+        </div>
+        <div id="side-bar">
+            <a id="dashboard" href="dashboard.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                    <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                  </svg> Dashboard
+            </a>
+            <a id="settings" class="selected" href="settings.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                    <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                </svg> Settings
+            </a>
+        </div>
+        
+        <div id="cover-frame"></div>
+        <!-- All the Little Boxes! :)  -->
+        <div id="body">
+            <!-- Profile Little Box -->
+            <div id="profile">
+                <div id="profile-pic"></div>
+                <p id="user_info"></p>
+            </div>
+            <!-- Max Predictions Little Box -->
+            <div id="max-predictions">
+                <p id="mp-title">Maximum Predictions</p>
+                <form>
+                    <input type="number" id="input-mp" name="input-mp">
+                </form>
+            </div>
+            <!-- Notifications Timeout Little Box -->
+            <div id="notifications-timeout">
+                <p id="nt-title">Notifications Timeout</p>
+                <form>
+                    <input type="number" id="input-nt" name="input-nt">
+                </form><br>
+                <label for="input-nt" id="minutes_label">minutes</label>
+            </div>
+            <!-- Choose Model Little Box -->
+            <div id="choose-model">
+                <p id="cm-title">Choose Model</p>
+                <div class="dropdown">
+                    <!-- <form>
+                        <input type="text" id="input-cm" name="input-cm">
+                    </form> -->
+                    <button class="input-cm" id="input-cm"></button>
+                    <div class="dropdown-content">
+                      <a href="1">YOLO</a>
+                      <a href="2">Inception</a>
+                      <a href="3">Exception</a>
+                      <a href="4">ResNet</a>
+                      <a href="5">AlexNet</a>
+                      <a href="6">VGG Net</a>
+                    </div>
+                </div>
+                <form id="uses_DNN">
+                    <label for="DNN-chbx" id="chbx-title">Uses DNN?</label><br>
+                    <input type="checkbox" id="DNN-chbx">
+                </form>
+            </div>
+            <!-- Confidence Threshold Little Box -->
+            <div id="confidence-threshold">
+                <p id="ct-title">Confidence Threshold</p>
+                <div class="slidecontainer">
+                    <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+                    <p>Value: <span id="demo"></span>%</p>
+                </div>
+            </div>
+        </div>
+        <div id="full-cover"></div>
+        <script src="jsmpeg.min.js"></script>
+        <script src="script.js"></script>
+        <script src="connect_to_cams.js"></script>
+        <script src="dashboard.js"></script>
+        <script src="settings.js"></script>
+    </body>
+</html>
