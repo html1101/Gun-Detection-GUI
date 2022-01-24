@@ -18,6 +18,7 @@ const createWindow = () => {
         width: 800,
         height: 600,
         title: "Gun Detection GUI",
+        // frame: false,
         webPreferences: {
           nodeIntegration: false, // is default value after Electron v5
           contextIsolation: true, // protect against prototype pollution
@@ -25,6 +26,9 @@ const createWindow = () => {
           preload: __dirname + "/preload.js" // use a preload script
         }
     })
+    win.setResizable(false)
+    // win.setFullScreen(true)
+    // win.setFullScreenable(false)
 
     win.loadFile("Frontend/dashboard.html");
     let cams = new camera_lib();

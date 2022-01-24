@@ -35,54 +35,57 @@
         <div id="cover-frame"></div>
         <!-- All the Little Boxes! :)  -->
         <div id="body">
-            <!-- Profile Little Box -->
-            <div id="profile">
-                <div id="profile-pic"></div>
-                <p id="user_info"></p>
-            </div>
-            <!-- Max Predictions Little Box -->
-            <div id="max-predictions">
-                <p id="mp-title">Maximum Predictions</p>
-                <form>
-                    <input type="number" id="input-mp" name="input-mp">
-                </form>
-            </div>
-            <!-- Notifications Timeout Little Box -->
-            <div id="notifications-timeout">
-                <p id="nt-title">Notifications Timeout</p>
-                <form>
-                    <input type="number" id="input-nt" name="input-nt">
-                </form><br>
-                <label for="input-nt" id="minutes_label">minutes</label>
-            </div>
-            <!-- Choose Model Little Box -->
-            <div id="choose-model">
-                <p id="cm-title">Choose Model</p>
-                <div class="dropdown">
-                    <!-- <form>
-                        <input type="text" id="input-cm" name="input-cm">
-                    </form> -->
-                    <button class="input-cm" id="input-cm"></button>
-                    <div class="dropdown-content">
-                      <a href="1">YOLO</a>
-                      <a href="2">Inception</a>
-                      <a href="3">Exception</a>
-                      <a href="4">ResNet</a>
-                      <a href="5">AlexNet</a>
-                      <a href="6">VGG Net</a>
-                    </div>
+            <div class="flex">
+                <!-- Profile Little Box -->
+                <div id="profile" class="box">
+                    <div id="profile-pic"></div>
+                    <p id="user_info"></p>
                 </div>
-                <form id="uses_DNN">
-                    <label for="DNN-chbx" id="chbx-title">Uses DNN?</label><br>
-                    <input type="checkbox" id="DNN-chbx">
-                </form>
+                <!-- Max Predictions Little Box -->
+                <div id="max-predictions" class="box">
+                    <p id="mp-title">Maximum Predictions</p>
+                    <form>
+                        <input type="number" id="input-mp" name="input-mp">
+                    </form>
+                </div>
+                <!-- Notifications Timeout Little Box -->
+                <div id="notifications-timeout" class="box">
+                    <p id="nt-title">Notifications Timeout</p>
+                    <form>
+                        <input type="number" id="input-nt" name="input-nt">
+                    </form><br>
+                    <label for="input-nt" id="minutes_label">minutes</label>
+                </div>
             </div>
-            <!-- Confidence Threshold Little Box -->
-            <div id="confidence-threshold">
-                <p id="ct-title">Confidence Threshold</p>
-                <div class="slidecontainer">
-                    <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
-                    <p>Value: <span id="demo"></span>%</p>
+            <div class="flex second">
+                <!-- Choose Model Little Box -->
+                <div id="choose-model" class="box">
+                    <p id="cm-title">Choose Model</p>
+                    <div class="dropdown">
+                        <!-- <form>
+                            <input type="text" id="input-cm" name="input-cm">
+                        </form> -->
+                        <button class="input-cm" id="input-cm"></button>
+                        <div class="dropdown-content">
+                            <a href="1">YOLO</a>
+                            <a href="2">Inception</a>
+                            <a href="3">Exception</a>
+                            <a href="4">ResNet</a>
+                            <a href="5">AlexNet</a>
+                            <a href="6">VGG Net</a>
+                        </div>
+                    </div>
+                    <form id="uses_DNN">
+                        <label for="DNN-chbx" id="chbx-title">Uses DNN?</label> <input type="checkbox" id="DNN-chbx">
+                    </form>
+                </div>
+                <!-- Confidence Threshold Little Box -->
+                <div id="confidence-threshold" class="box">
+                    <p id="ct-title">Confidence Threshold</p>
+                    <div class="slidecontainer">
+                        <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+                        <p>Value: <span id="demo"></span>%</p>
+                    </div>
                 </div>
             </div>
         </div>

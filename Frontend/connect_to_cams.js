@@ -8,7 +8,7 @@ Cameras can be connected in the following ways:
 */
 
 let cameras = [
-    {
+/*    {
         "camera_name": "Hello there!",
         "location": "Office",
         "connection_type": "rtsp",
@@ -28,5 +28,5 @@ let cameras = [
         "location": "Coding Den",
         "connection_type": "rtsp",
         "url": "rtsp://rtsp.stream/pattern"
-    }
+    }*/
 ];
