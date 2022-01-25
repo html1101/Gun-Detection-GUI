@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="camera-popup.css">
+    <script src="connect_to_cams.js"></script>
     <body>
         <div id="top-bar">
             <img src="Science-Icon-Demo.png" alt="Science Icon" id="science-icon"> 
@@ -36,23 +37,23 @@
             <div id="cam-frame">
                 <div id="selected-cam" class="cam spot1">
                     <div class="top-bit">Selected Camera</div>
-                    <div class="center"><canvas class="cam_spot"></canvas></div>
+                    <div class="center"><img src="No-Cam-Connected.png" class="cam_spot"></div>
                     <!--Selected cam goes in here-->
                 </div>
                 <div id="side-col">
                     <!-- Where the 3 cams go -->
                     <div class="cam spot2">
                         <div class="top-bit">Cam 1</div>
-                        <div class="center"><canvas class="cam_spot"></canvas></div>
+                        <div class="center"><img src="No-Cam-Connected.png" class="cam_spot"></div>
                     </div>
                     <div class="cam spot3">
                         <div class="top-bit">Cam 2</div>
-                        <div class="center"><canvas class="cam_spot"></canvas></div>
+                        <div class="center"><img src="No-Cam-Connected.png" class="cam_spot"></div>
                     </div>
                     <div class="cam spot4">
                         <div class="top-bit">Cam 3</div>
                         <div class="center">
-                            <canvas class="cam_spot"></canvas>
+                            <img src="No-Cam-Connected.png" class="cam_spot">
                         </div>
                     </div>
                 </div>
@@ -61,12 +62,12 @@
                     <div class="cam spot5">
                         <div class="top-bit">Cam 4</div>
                         <div class="center">
-                            <canvas class="cam_spot"></canvas>
+                            <img src="No-Cam-Connected.png" class="cam_spot">
                         </div>
                     </div>
                     <div class="cam spot6">
                         <div class="top-bit">Cam 5</div>
-                        <div class="center"><canvas class="cam_spot"></canvas></div>
+                        <div class="center"><img src="No-Cam-Connected.png" class="cam_spot"></div>
                     </div>
                 </div>
             </div>
@@ -150,9 +151,7 @@
             </div>
         </div>
         <div id="full-cover"></div>
-        <script src="jsmpeg.min.js"></script>
         <script src="script.js"></script>
-        <script src="connect_to_cams.js"></script>
         <script src="dashboard.js"></script>
     </body>
 </html>

@@ -1,7 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require("electron"),
 net = require("net"),
-Stream = require('node-rtsp-stream'),
-camera_lib = require("./cameras");
+camera_lib = require("./cameras"),
+http = require("http"),
+{ spawn } = require("child_process");
 
 const getPort = (callback) => {
     let server = net.createServer()
@@ -15,8 +16,8 @@ const getPort = (callback) => {
 
 const createWindow = () => {
     const win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 900,
+        height: 700,
         title: "Gun Detection GUI",
         // frame: false,
         webPreferences: {
@@ -27,8 +28,14 @@ const createWindow = () => {
         }
     })
     win.setResizable(false)
+
+    let model_type = "MobileNet", // Default model type
+    threshold = 0.7 // Default threshold
     // win.setFullScreen(true)
     // win.setFullScreenable(false)
+
+    let url_list = {}; // List of RTSP URLs we are already listening to
+    let list_of_cameras = []; // List of cameras as loaded by connect_to_cams.js.
 
     win.loadFile("Frontend/dashboard.html");
     let cams = new camera_lib();
@@ -62,28 +69,60 @@ const createWindow = () => {
 
     ipcMain.on("startRTSP", (info, data) => {
         // Given URL to start RTSP feed, start on a port we send over.
-        getPort((port) => {
-            // Now create stream on this open port
-            let stream = new Stream({
-                name: "Stream",
-                streamUrl: data["url"],
-                wsPort: port,
-                ffmpegOptions: {
-                    // "-crf": 28
-                }
+        let get_ip = data["url"].split(":")[0];
+        if(!(get_ip in url_list)) {
+            getPort((port) => {
+                
+                // On this end, begin listening to this RTSP url for guns using Python code.
+                console.log(`Listening for guns at ${data["url"]}`);
+                console.log(model_type, data["url"]);
+                script = spawn("python3", ["./Models/evaluate.py", model_type, data["url"], port, threshold]);
+                
+                // Debug: Print out errors that occur.
+                script.stderr.on("data", (chunk) => {
+                    console.log(chunk.toString())
+                })
+                // Tell dashboard to listen to camera feed locally.
+                win.webContents.send("newFeed", {...data, "port": port});
+                
+                url_list[get_ip] = port;
             });
-            let sent_newfeed = false;
-            stream.on("camdata", () => {
-                // We successfully started the feed, now inform preloader => renderer
-                if(!sent_newfeed) {
-                    win.webContents.send("newFeed", {...data, "port": port});
-                    sent_newfeed = true;
-                }
-            });
-            
-            // On this end, begin listening to this RTSP url for guns using Python code.
-        });
+        } else {
+            // Remind client the port this RTSP feed is at
+            win.webContents.send("newFeed", {...data, "port": url_list[get_ip]});
+        }
     });
+
+    ipcMain.on("loadCameraList", (_info, data) => {
+        // Send back the list of cameras previously saved
+        console.log("LIST", list_of_cameras);
+        win.webContents.send("cameraList", list_of_cameras);
+    })
+    ipcMain.on("saveCameraList", (_info, data) => {
+        // Save list of cameras given.
+        list_of_cameras = data;
+    })
+    ipcMain.on("getThreshold", (_info, _data) => {
+        win.webContents.send("thresholdValue", threshold);
+    })
+    ipcMain.on("setThreshold", (_info, data) => {
+        threshold = data;
+
+        // Make GET request to each port to change each threshold value.
+        let list_url_keys = Object.keys(url_list);
+        for(let i = 0; i < list_url_keys.length; i++) {
+            let options = {
+                hostname: "localhost",
+                port: url_list[list_url_keys[i]],
+                path: `/changeThresh?threshold=${threshold}`,
+                method: "GET"
+            }
+            console.log(options);
+
+            let req = http.request(options, _res => {});
+            req.end()
+        }
+    })
 }
 
 app.whenReady().then(() => {
