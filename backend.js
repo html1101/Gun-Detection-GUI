@@ -80,14 +80,8 @@ const createWindow = () => {
                     sent_newfeed = true;
                 }
             });
-            // // Critical error
-            // stream.mpeg1Muxer.on('ffmpegStderr', () => {
-            //     stream.stop();
-            //     // Inform preloader => renderer
-            //     console.log("Failed feed");
-            //     win.webContents.send("failedFeed", data["cam_id"]);
-            //     return;
-            // });
+            
+            // On this end, begin listening to this RTSP url for guns using Python code.
         });
     });
 }
