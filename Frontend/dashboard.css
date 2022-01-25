@@ -77,10 +77,19 @@
 .cam > .cam_spot {
     position: relative;
     margin: 0 auto;
+    height: 100%;
 }
 
 #side-col > .cam:first-of-type {
     border-top: 0;
+}
+
+#side-col > .cam > .center > .cam_spot {
+    height: 33.33%;
+}
+
+#bottom-col > .cam > .center > .cam_spot {
+    height: 33.33%;
 }
 
 #bottom-col > .cam:last-of-type {
@@ -109,7 +118,7 @@
 }
 
 
-#top-bar > .bi-gear-fill {
+#top-bar > .bi-plus-circle-fill {
     position: relative;
     float: right;
     right: 1em;

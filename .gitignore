@@ -4,3 +4,4 @@ Models/wandb
 models/chromedriver.exe
 Models/*/*_weights
 Models/*_weights
+Models/__pycache__

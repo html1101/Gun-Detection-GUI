@@ -14,8 +14,8 @@ let cameras = [
         "connection_type": "rtsp",
         "selected": true,
         "address": "192.168.86.39",
-        "url": "rtsp://192.168.86.39"
-    },
+        "url": "rtsp://192.168.86.39/stream1"
+    }
     {
         "camera_name": "Sarah",
         "location": "Porch",
@@ -30,3 +30,12 @@ let cameras = [
         "url": "rtsp://rtsp.stream/pattern"
     }*/
 ];
+
+// Load camera list using IPC
+window.api.send("loadCameraList");
+
+window.api.receive("cameraList", (list) => {
+    console.log("LIST SENT: ", list);
+    // Add list to cameras variable
+    cameras = list;
+})
