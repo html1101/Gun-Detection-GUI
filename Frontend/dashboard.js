@@ -61,7 +61,7 @@ window.api.receive("newFeed", (data) => {
     doc.src = `http://localhost:${data["port"]}`
     doc.onerror = () => {
         // Error loading, default to standard no cam connected
-        doc.src = "error-cam.png";
+        doc.src = `http://localhost:${data["port"]}`;
     }
 
     // We need to scale so that the RTSP feed is not squeezed. Resize width or height (height if width > height, width if height > width)
@@ -70,8 +70,7 @@ window.api.receive("newFeed", (data) => {
     if (wid > hei) doc.style.height = hei + "px";
     else doc.style.width = wid + "px";
 
-    console.log("Playing: " + `ws://localhost:${data["port"]}` + " on: ", doc);
-
+    console.log("Playing: " + `http://localhost:${data["port"]}` + " on: ", doc);
 })
 
 

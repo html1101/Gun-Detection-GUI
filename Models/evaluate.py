@@ -7,6 +7,7 @@ import cv2
 import numpy as np
 from camera import Camera
 from os.path import exists
+from datetime import datetime
 import os, threading
 from flask import Response, Flask, render_template, request
 
@@ -16,7 +17,11 @@ lock = threading.Lock()
 # initialize a flask object
 app = Flask(__name__)
 
-
+# If the past N frames predict X% gun, then log.
+N_frames = 10
+log_amount = 0.8
+logList = []
+logCache = []
 os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 
 # Input a given model given.
@@ -27,11 +32,9 @@ assert len(arguments) >= 3, F"Only {len(arguments)} passed in; at least 3 argume
 # Now it's time to create the list of models.
 models = {
     "InceptionV3": tf.keras.applications.InceptionV3,
-    "VGG16": tf.keras.applications.VGG16,
-    "VGG19": tf.keras.applications.VGG19,
     "Xception": tf.keras.applications.Xception,
-    "MobileNetV3Large": tf.keras.applications.MobileNetV3Large,
-    "MobileNet": tf.keras.applications.MobileNet
+    "MobileNet": tf.keras.applications.MobileNet,
+    "ResNet50": tf.keras.applications.ResNet50
 }
 
 # Now check the model being passed in is valid.
@@ -78,8 +81,8 @@ if len(arguments) >= 5:
     assert threshold >= 0 and threshold <= 1, "Threshold given is not within range."
 
 # Use OpenCV + camera.py to keep an eye on this feed.
-vid_1 = cv2.VideoCapture("rtsp://192.168.86.39")
-vid_1.set(cv2.CAP_PROP_FPS, 15)
+vid_1 = cv2.VideoCapture(rtsp_url)
+vid_1.set(cv2.CAP_PROP_FPS, 30)
 
 vid = Camera(vid_1, "Window")
 
@@ -104,6 +107,14 @@ def changeThresh():
         print(F"Invalid threshold value: {new_thresh}")
         return F"Invalid threshold value: {new_thresh}."
 
+@app.route("/getLog")
+def getLog():
+    global logList
+    
+    # Return a list of the logs, separated by newlines
+    return "<br>".join(logList)
+
+
 def streamImage():
     global outputFrame, lock
 
@@ -123,29 +134,51 @@ def streamImage():
         bytearray(encodedImage) + b'\r\n')
 
 def detect_guns():
-    global vid, outputFrame, lock
+    global vid, outputFrame, lock, logCache
 
     while True:
         # Read from RTSP feed
         ret, frame = vid.read()
         
-        new_frame = np.expand_dims(preprocess(cv2.resize(frame, (image_width, image_height))), axis=0)
-        # Run through model
-        result = nn_model.predict(new_frame)[0]
-        # print(F"GUN | {result[0]}" if result[0] >= threshold else F"NO GUN | {result[0]}, {result[1]}")
+        if not frame is None:
+            new_frame = np.expand_dims(preprocess(cv2.resize(frame, (image_width, image_height))), axis=0)
+            # Run through model
+            result = nn_model.predict(new_frame)[0]
+            # print(F"GUN | {result[0]}" if result[0] >= threshold else F"NO GUN | {result[0]}, {result[1]}")
+            if result[0] >= threshold:
+                # This is a gun, log it
+                logCache.append(1)
+            else:
+                logCache.append(0)
+            # Get last N logs
+            logCache = logCache[-N_frames:]
+            # Check percent
+            print(F"Percent frames with guns: {sum(logCache) / N_frames} {logCache}")
+            if sum(logCache) / N_frames > log_amount:
+                logList.append(F"GUN detected at {datetime.today()}")
+                logCache = [0 for i in range(N_frames)]
 
-        frame = cv2.putText(
-            frame,
-            F"GUN ({round(result[0] * 100) / 100})" if result[0] >= threshold else F"No gun ({round(result[1] * 100) / 100})",
-            (50, int(vid_1.get(cv2.CAP_PROP_FRAME_HEIGHT) - 70)),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            4,
-            (0, 0 if result[0] >= threshold else 255, 255 if result[0] >= threshold else 0),
-            3
-        )
+            frame = cv2.putText(
+                frame,
+                F"GUN ({round(result[0] * 100) / 100})" if result[0] >= threshold else F"No gun ({round(result[1] * 100) / 100})",
+                (50, int(vid_1.get(cv2.CAP_PROP_FRAME_HEIGHT) - 70)),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                4,
+                (0, 0 if result[0] >= threshold else 255, 255 if result[0] >= threshold else 0),
+                3
+            )
+            frame = cv2.putText(
+                frame,
+                F"{datetime.today()}",
+                (50, int(vid_1.get(cv2.CAP_PROP_FRAME_HEIGHT) - 180)),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                2,
+                (255, 255, 255),
+                3
+            )
 
-        with lock:
-            outputFrame = frame.copy()
+            with lock:
+                outputFrame = frame.copy()
 
 if __name__ == '__main__':
     # Create thread where we continuously detect guns
