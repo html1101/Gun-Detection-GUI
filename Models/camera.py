@@ -1,3 +1,5 @@
+# Multithreading reading RTSP streams
+# (Basically, if a frame is dropped or isn't received in a timely manner, we keep consistently reading the frames at a fixed amount per second)
 import threading
 
 # also acts (partly) like a cv.VideoCapture

@@ -44,6 +44,10 @@ model = arguments[1]
 # If Inception or Xception, image size is (299, 299, 3)
 image_width = 224
 image_height = 224
+if model in ("InceptionV3", "Xception"):
+    # Image size should be (299, 299)
+    image_height = 299
+    image_width = 299
 
 if model in ("InceptionV3", "Xception"):
     image_width = 299
@@ -51,6 +55,10 @@ if model in ("InceptionV3", "Xception"):
 if model == "MobileNet":
     # Use the following preprocessing
     preprocess = tf.keras.applications.mobilenet.preprocess_input
+if model == "InceptionV3":
+    preprocess = tf.keras.applications.inception_v3.preprocess_input
+if model == "Xception":
+    preprocess = tf.keras.applications.xception.preprocess_input
 
 # Now check that we have existing weights for this model.
 assert exists(os.path.dirname(__file__) + F"/{model}_weights/checkpoint"), F"This model (./{model}_weights/checkpoint) has not been trained yet."

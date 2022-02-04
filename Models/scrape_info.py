@@ -1,10 +1,7 @@
-# Scrape info from .xlsx file.
-from numpy import number
-import pandas as pd
+# Scrape info from the file GUNS.txt or NO-GUNS.txt.
 import requests
 import os
 import threading
-from urllib.parse import unquote
 
 VERSION = "GUNS"
 

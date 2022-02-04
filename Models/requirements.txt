@@ -1,7 +1,8 @@
+# List of packages required to train and evaluate.
 matplotlib
 numpy
-pillow
+opencv
 tensorflow
-wandb
-pandas
-pydot
+pillow
+pathlib
+threading

@@ -2,7 +2,7 @@ Model: "mobilenet_1.00_224"
 _________________________________________________________________
  Layer (type)                Output Shape              Param #   
 =================================================================
- input_2 (InputLayer)        [(None, 224, 224, 3)]     0         
+ input_1 (InputLayer)        [(None, 224, 224, 3)]     0         
                                                                  
  conv1 (Conv2D)              (None, 112, 112, 32)      864       
                                                                  
@@ -205,8 +205,8 @@ _________________________________________________________________
                                                                  
  conv_pw_13_relu (ReLU)      (None, 7, 7, 1024)        0         
                                                                  
- global_average_pooling2d_1   (None, 1, 1, 1024)       0         
- (GlobalAveragePooling2D)                                        
+ global_average_pooling2d (G  (None, 1, 1, 1024)       0         
+ lobalAveragePooling2D)                                          
                                                                  
  dropout (Dropout)           (None, 1, 1, 1024)        0         
                                                                  

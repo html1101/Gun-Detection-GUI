@@ -1,3 +1,5 @@
+# Useful for detecting if the file structure of Dataset is setup so that we can train correctly.
+
 import os
 import cv2
 def check_images( s_dir, ext_list):
