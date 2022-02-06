@@ -1,12 +1,13 @@
 # Multithreading reading RTSP streams
 # (Basically, if a frame is dropped or isn't received in a timely manner, we keep consistently reading the frames at a fixed amount per second)
 import threading
+import time
 
 # also acts (partly) like a cv.VideoCapture
 class Camera(threading.Thread):
     def __init__(self, capture, name):
         self.capture = capture
-        assert self.capture.isOpened()
+        assert self.capture.isOpened(), "Unable to connect to camera."
 
         # this lets the read() method block until there's a new frame
         self.cond = threading.Condition()

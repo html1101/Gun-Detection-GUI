@@ -6,3 +6,5 @@ Models/*/*_weights
 Models/*_weights
 Models/__pycache__
 Models/*.mp4
+Models/*.zip
+Models/*.flv

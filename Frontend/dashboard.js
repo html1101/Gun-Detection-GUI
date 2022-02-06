@@ -60,7 +60,7 @@ window.api.receive("newFeed", (data) => {
     let doc = document.querySelector(`.spot${data["cam_id"]} .cam_spot`)
     doc.src = `http://localhost:${data["port"]}`
     doc.onerror = () => {
-        // Error loading, default to standard no cam connected
+        // Error loading, try again if no cam connected
         doc.src = `http://localhost:${data["port"]}`;
     }
 
@@ -188,3 +188,26 @@ window.onbeforeunload = function () {
     window.api.send("saveCameraList", cameras);
     return null;
 }
+
+
+// Check status of guns detected using /getLog.
+let detections = [];
+
+let status_check = new XMLHttpRequest();
+status_check.onreadystatechange = function() {
+    if(status_check.status == 200 && status_check.readyState == 4) {
+        status_check.innerHTML.split("\n").forEach(line => {
+            // Each line will contain "GUN detected at [time] with []% accuracy". Get time and check if detection already made.
+            let time = new Date(line.split("GUN detected at ").join("").split(" with ")[0]);
+            if(!(time in detections)) {
+                // Put time in detections and append to list of guns
+                let new_elem = document.createElement("tr");
+                new_elem.innerHTML = `<tr>${time}</tr><tr>${line}</tr>`
+                detections.push(time);
+            }
+        })
+    }
+};
+setInterval(() => {
+    // Make a request
+}, 500)

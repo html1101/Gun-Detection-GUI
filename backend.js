@@ -29,8 +29,8 @@ const createWindow = () => {
     })
     win.setResizable(false)
 
-    let model_type = "MobileNet", // Default model type
-    threshold = 0.7 // Default threshold
+    let model_type = "Xception", // Default model type
+    threshold = 0.25 // Default threshold
     // win.setFullScreen(true)
     // win.setFullScreenable(false)
 
@@ -69,7 +69,8 @@ const createWindow = () => {
 
     ipcMain.on("startRTSP", (info, data) => {
         // Given URL to start RTSP feed, start on a port we send over.
-        let get_ip = data["url"].split(":")[0];
+        let get_ip = data["url"].split("://")[1];
+        console.log(`Getting URL: ${get_ip}`);
         if(!(get_ip in url_list)) {
             getPort((port) => {
                 

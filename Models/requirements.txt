@@ -1,8 +1,7 @@
 # List of packages required to train and evaluate.
 matplotlib
 numpy
-opencv
+opencv-python
 tensorflow
 pillow
 pathlib
-threading

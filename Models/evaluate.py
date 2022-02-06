@@ -9,7 +9,7 @@ from camera import Camera
 from os.path import exists
 from datetime import datetime
 import os, threading
-from flask import Response, Flask, render_template, request
+from flask import Response, Flask, request
 
 # To exchange output frame and lock for thread-safe exchanges.
 outputFrame = None
@@ -34,7 +34,8 @@ models = {
     "InceptionV3": tf.keras.applications.InceptionV3,
     "Xception": tf.keras.applications.Xception,
     "MobileNet": tf.keras.applications.MobileNet,
-    "ResNet50": tf.keras.applications.ResNet50
+    "ResNet50": tf.keras.applications.ResNet50,
+    "EfficientNetB3": tf.keras.applications.EfficientNetB3
 }
 
 # Now check the model being passed in is valid.
@@ -52,13 +53,18 @@ if model in ("InceptionV3", "Xception"):
 if model in ("InceptionV3", "Xception"):
     image_width = 299
     image_height = 299
+
 if model == "MobileNet":
     # Use the following preprocessing
     preprocess = tf.keras.applications.mobilenet.preprocess_input
-if model == "InceptionV3":
+elif model == "InceptionV3":
     preprocess = tf.keras.applications.inception_v3.preprocess_input
-if model == "Xception":
+elif model == "Xception":
     preprocess = tf.keras.applications.xception.preprocess_input
+elif model == "ResNet50":
+    preprocess = tf.keras.applications.resnet50.preprocess_input
+elif model == "EfficientNetB3":
+    preprocess = tf.keras.applications.efficientnet.preprocess_input
 
 # Now check that we have existing weights for this model.
 assert exists(os.path.dirname(__file__) + F"/{model}_weights/checkpoint"), F"This model (./{model}_weights/checkpoint) has not been trained yet."
@@ -92,7 +98,10 @@ if len(arguments) >= 5:
 vid_1 = cv2.VideoCapture(rtsp_url)
 vid_1.set(cv2.CAP_PROP_FPS, 30)
 
-vid = Camera(vid_1, "Window")
+if rtsp_url.startswith("rtsp"):
+    vid = Camera(vid_1, "Window")
+else:
+    vid = vid_1
 
 ret, frame = vid.read()
 
@@ -146,7 +155,10 @@ def detect_guns():
 
     while True:
         # Read from RTSP feed
-        ret, frame = vid.read()
+        if rtsp_url.startswith("rtsp"):
+            ret, frame = vid.read(wait=False)
+        else:
+            ret, frame = vid.read()
         
         if not frame is None:
             new_frame = np.expand_dims(preprocess(cv2.resize(frame, (image_width, image_height))), axis=0)
@@ -163,7 +175,7 @@ def detect_guns():
             # Check percent
             print(F"Percent frames with guns: {sum(logCache) / N_frames} {logCache}")
             if sum(logCache) / N_frames > log_amount:
-                logList.append(F"GUN detected at {datetime.today()}")
+                logList.append(F"GUN detected at {datetime.today()} with {sum(logCache) / N_frames * 100}% accuracy")
                 logCache = [0 for i in range(N_frames)]
 
             frame = cv2.putText(
@@ -194,7 +206,7 @@ if __name__ == '__main__':
 	t.daemon = True
 	t.start()
 
-	# Start little Flask app that hosts our video at /
+    # Start little Flask app that hosts our video at /
 	app.run(host="127.0.0.1", port=port, debug=True,
 		threaded=True, use_reloader=False)
 
