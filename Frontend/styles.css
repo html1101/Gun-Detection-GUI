@@ -1,6 +1,6 @@
 body {
     --bar-width: 9rem;
-    --bar-height: 3.5rem;
+    --bar-height: calc(3.5rem + 30px);
     --adaptive-width: 2rem;
     --text-color: #A9B1BC;
     --popup-color: #383838;
@@ -19,19 +19,19 @@ body {
 
 #science-icon {
     width: var(--bar-width);
-    height: var(--bar-height);
+    height: calc(var(--bar-height) - 30px);
     filter: invert(100%);
 }
 
 #top-bar {
-    position: fixed;
+    position: absolute;
     z-index: 3;
     top: 0;
     left: 0;
     width: 100%;
     font-size: 30px;
     color: var(--text-color);
-    height: var(--bar-height);
+    height: calc(var(--bar-height) - 30px);
     background: var(--main-color);
     box-shadow: 1px 1px 8px 3px #00000056;
 }
@@ -150,4 +150,8 @@ body {
 
 *[id^="hide_"] {
     display: none;
+}
+
+.cet-container {
+    z-index: -1;
 }

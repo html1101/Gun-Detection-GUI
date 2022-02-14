@@ -17,16 +17,16 @@ let cameras = [
     //     "url": "rtsp://192.168.86.39/stream1"
     // },
     {
-        "camera_name": "Yo",
-        "location": "Coding Den",
-        "connection_type": "rtsp",
-        "url": "rtsp://rtsp.stream/pattern"
-    },
-    {
         "camera_name": "The Matrix",
         "location": "Coding Den",
         "connection_type": "rtsp",
         "url": "Models/The_Matrix.mp4"
+    },
+    {
+        "camera_name": "Shooter's Grill",
+        "location": "Coding Den",
+        "connection_type": "rtsp",
+        "url": "Models/Shoot_Grill.mp4"
     }
 ];
 
@@ -36,5 +36,10 @@ window.api.send("loadCameraList");
 window.api.receive("cameraList", (list) => {
     console.log("LIST SENT: ", list);
     // Add list to cameras variable
-    cameras = list;
+    let cams = Object.keys(list);
+    for(let i = 0; i < cams.length; i++) {
+        if(!(cams[i] in cameras)) {
+            cameras[cams[i]] = list[cams[i]];
+        }
+    }
 })

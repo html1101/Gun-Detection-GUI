@@ -133,7 +133,7 @@
 }
   
 /* Links inside the dropdown */
-.dropdown-content a {
+.dropdown-content div {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -141,7 +141,7 @@
 }
   
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #1DDECB}
+.dropdown-content div:hover {background-color: #1DDECB}
   
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
@@ -233,4 +233,8 @@
 
 .second {
     margin-top: 1em !important;
+}
+
+#max-predictions {
+    text-align: center;
 }

@@ -53,6 +53,8 @@ window.api.receive("cameraList", (list) => {
     refreshCameras();
 });
 
+let portToCam = {};
+
 // On notification that there's a new feed, display it.
 window.api.receive("newFeed", (data) => {
     // Open port data["port"] for this div.
@@ -71,6 +73,10 @@ window.api.receive("newFeed", (data) => {
     else doc.style.width = wid + "px";
 
     console.log("Playing: " + `http://localhost:${data["port"]}` + " on: ", doc);
+
+    // Map port to camera
+    // console.log(data["cam_id"], cameras);
+    portToCam[data["port"]] = cameras[data["cam_id"] - 1].camera_name;
 })
 
 
@@ -112,11 +118,12 @@ document.querySelector(`#${state_connection} .next_btn`).addEventListener("click
                     prev_ip.push(info["address"]);
                     // Display a little + on hover to add this camera
                     let new_elem = document.createElement("div");
-                    new_elem.innerHTML = `${info["address"]} - ${info["manufacturer"]} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi add_cam_button" viewBox="0 0 16 16">
+                    console.log(info);
+                    new_elem.innerHTML = `${info["address"]} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi add_cam_button" viewBox="0 0 16 16">
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
                     </svg>`;
 
-                    slide_elem.querySelector(".cam_list").appendChild(new_elem)
+                    slide_elem.querySelector(".cam_list").appendChild(new_elem);
                     let add_cam_btn = new_elem.querySelector(".add_cam_button");
 
                     let cam_selected = false;
@@ -196,18 +203,26 @@ let detections = [];
 let status_check = new XMLHttpRequest();
 status_check.onreadystatechange = function() {
     if(status_check.status == 200 && status_check.readyState == 4) {
-        status_check.innerHTML.split("\n").forEach(line => {
+        status_check.responseText.split("<br>").forEach(line => {
             // Each line will contain "GUN detected at [time] with []% accuracy". Get time and check if detection already made.
-            let time = new Date(line.split("GUN detected at ").join("").split(" with ")[0]);
+            let time = new Date(line.split("GUN detected at ").join("").split(" with ")[0]).toLocaleDateString("en-us", { year: "2-digit", month: "2-digit", day: "2-digit", minute: "2-digit", hour: "2-digit", second: "2-digit"});
             if(!(time in detections)) {
                 // Put time in detections and append to list of guns
                 let new_elem = document.createElement("tr");
-                new_elem.innerHTML = `<tr>${time}</tr><tr>${line}</tr>`
+                console.log(portToCam);
+                new_elem.innerHTML = `<td>${portToCam[status_check.responseURL.split("localhost:")[1].split("/getLog")[0]]}</td><td>${time}</td><td>${line}</td>`
                 detections.push(time);
+                let list_events = document.getElementById("list-of-events");
+                list_events.insertBefore(new_elem, list_events.children[1]);
             }
         })
     }
 };
 setInterval(() => {
     // Make a request
-}, 500)
+    let ports = Object.keys(portToCam);
+    for(let i = 0; i < ports.length; i++) {
+        status_check.open("GET", `http://localhost:${ports[i]}/getLog`);
+        status_check.send();
+    }
+}, 2000)

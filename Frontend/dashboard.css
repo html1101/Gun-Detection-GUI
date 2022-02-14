@@ -30,6 +30,8 @@
     bottom: 0;
     padding-left: 0.25em;
     padding-top: 0.25em;
+
+    overflow-y: hidden;
 }
 
 #selected-cam {
@@ -130,4 +132,14 @@
 .center {
     text-align: center;
     width: 100%;
+}
+
+#list-of-events {
+    position: relative;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.cet-container {
+    position: absolute;
 }
